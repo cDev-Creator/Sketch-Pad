@@ -1,0 +1,27 @@
+:root {
+    --grid-columns: 1;
+    --grid-rows: 1;
+}
+
+#container {
+    display: grid;
+    justify-content: center;
+    margin: auto;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    height: 550px;
+    width: 550px;
+    border: 3px solid rgb(0, 0, 0);
+}
+
+.grid-item {
+    display: flex;
+    padding: 1px;
+    border: 1px solid rgb(169, 169, 169);  
+    align-items: center;
+    justify-content: center;
+}
+
+#random-colors-button {
+    margin-bottom:10px;
+}
