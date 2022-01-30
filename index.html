@@ -8,18 +8,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class ="btns-container">
-        <button id="random-colors-button">Rainbow</button>
-        <button id="black-button">Black</button>
-        <button id="erase-button">Eraser</button>
-        <button id="resize-button">Resize</button>
-        <button id="clear-button">Clear</button>
-        <button id="grid-toggle-button">Grid</button>
-        <input id="color" type= "color">
-    </div>
-
-    <div id="grid-container"> </div>
+    <div id=title>SKETCH it</div>
+    <div class ="content-container">
+        <!-- parent id added so that it would be possible to place on-button on top 
+        of grid-container-border, hooked up in css -->
+        <div id="parent">
+            <div id="grid-container-border"> 
+                <div id="grid-container"> </div>
+                <button id="on-button"><img src="on.png" width="50" height="50"></button>
+            </div> 
+        </div>
     
+        <div class ="btns-container">
+            <input id="color" type= "color">
+            <button id="random-colors-button" onclick="randomColorButton()">Random</button>
+            <button id="black-button" onclick="blackButton()">Black</button>
+            <button id="erase-button" onclick="eraseButton()">Eraser</button>
+            <button id="clear-button"onclick="clearButton()">Clear</button>
+            <button id="resize-button">Resize</button>
+            <button id="grid-toggle-button">Grid</button>
+        </div>
+    </div>
 </body>
 
 <script src="app.js"></script>

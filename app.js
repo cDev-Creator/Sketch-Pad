@@ -1,13 +1,11 @@
 const gridContainer = document.getElementById('grid-container')
-const randColorsButton = document.getElementById('random-colors-button')
-const clearButton = document.getElementById('clear-button')
-const blackButton = document.getElementById('black-button')
-const eraseButton = document.getElementById('erase-button')
 const resizeButton = document.getElementById('resize-button')
 const gridToggleButton = document.getElementById('grid-toggle-button')
+const onButton = document.getElementById('on-button')
 const color = document.getElementById('color')
 const gridCells = document.getElementsByClassName("grid-item")
 
+// creates grid cells dynamically
 let gridCell
 function makeGridItem(numItems) {
     for (let i = 0; i < (numItems); i++) {
@@ -21,6 +19,7 @@ function makeGridItem(numItems) {
     }   
 }
 
+// creates grid using the added cell divs and places them in the correct number of rows/columns
 function createGrid(rows, columns) {
     gridContainer.style.setProperty('--grid-rows', rows)
     gridContainer.style.setProperty('--grid-columns', columns)
@@ -29,6 +28,7 @@ function createGrid(rows, columns) {
     } 
 }
 
+// generates random num/letter combo that is 6 characters long to create a hex color value
 function getRandomColor(){
     let hexValues = '0123456789ABCDEF';
     let color = '#';
@@ -38,31 +38,31 @@ function getRandomColor(){
     return color;
 }
 
-blackButton.addEventListener('click', e =>{
+// using onclick, if button is selected and a grid-item is moused over its color will change
+function blackButton() {
     gridContainer.addEventListener('mouseover', e =>{ 
         if(e.target.matches = 'div.grid-item') { 
-            /* gridContainer.style.backgroundColor = '' */
             e.target.style.backgroundColor = 'black'
         }  
     })
-})
+}
 
-randColorsButton.addEventListener('click', e =>{
+function randomColorButton() {
     gridContainer.addEventListener('mouseover', e =>{ 
         if(e.target.matches = 'div.grid-item') { 
            /*  gridContainer.style.backgroundColor = '' */
             e.target.style.backgroundColor = getRandomColor()
         } 
     })
-})
+}
 
-eraseButton.addEventListener('click', e =>{
+function eraseButton() {
     gridContainer.addEventListener('mouseover', e =>{ 
         if(e.target.matches = 'div.grid-item') { 
             e.target.style.backgroundColor = ''
         }  
     })
-})
+}
 
 color.addEventListener('input', function(){
     let customColor = document.getElementById('color').value
@@ -73,13 +73,12 @@ color.addEventListener('input', function(){
     })
 })
 
-
 createGrid(8,8)
 let resizeClickCounter = 0
 resizeButton.addEventListener('click', function (){
     resizeButton.innerHTML = '8 x 8'
     resizeClickCounter++
-    console.log(resizeClickCounter)
+   
     if (resizeClickCounter === 0) {
         reset()
         createGrid(8,8)
@@ -104,25 +103,50 @@ resizeButton.addEventListener('click', function (){
         createGrid(64,64)
         toggleGridOn()
         resizeButton.innerHTML = '64 x 64'
+        /* resizeClickCounter = -1 */
+    } 
+    if (resizeClickCounter === 4) {
+        reset()
+        createGrid(80,80)
+        toggleGridOn()
+        resizeButton.innerHTML = '80 x 80'
         resizeClickCounter = -1
     } 
+})
+
+
+let onBtnClickCounter = 0
+onButton.addEventListener('click', function (){
+    onBtnClickCounter++
+  
+    if(onBtnClickCounter === 1) {
+        gridContainer.style.boxShadow = "0px 0px 30px rgb(190, 190, 190)"
+        gridContainer.style.backgroundColor = "rgb(240, 240, 240)"   
+        onButton.style.boxShadow = "0 0 10px rgb(255, 255, 255)"
+    }
+
+    if(onBtnClickCounter === 2) {
+        gridContainer.style.boxShadow = "none"
+        onButton.style.boxShadow = "none"
+        gridContainer.style.backgroundColor = "rgb(200, 200, 200)"  
+        onBtnClickCounter=0
+    }  
 })
 
 let gridToggleClickCounter = 0
 gridToggleButton.addEventListener('click', function (){
     gridToggleClickCounter++
     
-    console.log(gridToggleClickCounter)
     if(gridToggleClickCounter === 1) {
         for (let i = 0; i < gridCells.length; i++) {
             gridToggleButton.innerHTML = 'Off'
-            gridCells[i].style.outline = '1px solid rgba(121, 121, 121, 0.627)';
+            gridCells[i].style.outline = '1px solid rgba(121, 121, 121, 0.627)'
         }
     }
     if(gridToggleClickCounter === 2) {
         for (let i = 0; i < gridCells.length; i++) {
             gridToggleButton.innerHTML = 'On'
-            gridCells[i].style.outline = 'none';
+            gridCells[i].style.outline = 'none'
             gridToggleClickCounter = 0 
         }  
     }  
@@ -132,11 +156,12 @@ function toggleGridOn() {
     gridToggleButton.innerHTML = 'On'
 }
 
-clearButton.addEventListener('click', e =>{
+function clearButton() {
     reset()
     toggleGridOn()
+    resizeButton.innerHTML = '8 x 8'
     createGrid(8,8)
- }) 
+ }
 
 function reset() {
     while (gridContainer.firstChild) {
