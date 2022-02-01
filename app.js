@@ -13,9 +13,6 @@ function makeGridItem(numItems) {
       gridCell.className =  "grid-item"
       gridContainer.appendChild(gridCell) 
 
-      gridCell.addEventListener('mouseover', e=> {
-          e.target.style.backgroundColor = 'black'
-      })
     }   
 }
 
@@ -33,7 +30,7 @@ function getRandomColor(){
     let hexValues = '0123456789ABCDEF';
     let color = '#';
     for (let i = 0; i < 6; i++) {
-        color += hexValues[Math.floor(Math.random() * 16)];
+        color += hexValues[Math.floor(Math.random() * 15)];
     }
     return color;
 }
@@ -42,18 +39,19 @@ function getRandomColor(){
 function blackButton() {
     gridContainer.addEventListener('mouseover', e =>{ 
         if(e.target.matches = 'div.grid-item') { 
+            /* gridContainer.style.backgroundColor = '' */
             e.target.style.backgroundColor = 'black'
         }  
     })
 }
 
 function randomColorButton() {
-    gridContainer.addEventListener('mouseover', e =>{ 
+    gridContainer.addEventListener('mouseover', (e) => {
         if(e.target.matches = 'div.grid-item') { 
-           /*  gridContainer.style.backgroundColor = '' */
-            e.target.style.backgroundColor = getRandomColor()
+             /* gridContainer.style.backgroundColor = '' */
+             e.target.style.backgroundColor = getRandomColor()
         } 
-    })
+    })   
 }
 
 function eraseButton() {
@@ -68,71 +66,74 @@ color.addEventListener('input', function(){
     let customColor = document.getElementById('color').value
     gridContainer.addEventListener('mouseover', e =>{ 
         if(e.target.matches = 'div.grid-item') {   
+            /* gridContainer.style.backgroundColor = '' */
             e.target.style.backgroundColor = customColor
         }  
     })
 })
 
+// different grid size options for the user to cycle through, each button click is a new size, then resets
 createGrid(8,8)
 let resizeClickCounter = 0
 resizeButton.addEventListener('click', function (){
-    resizeButton.innerHTML = '8 x 8'
+    resizeButton.innerHTML = '8x8'
     resizeClickCounter++
    
     if (resizeClickCounter === 0) {
         reset()
         createGrid(8,8)
         toggleGridOn()
-        resizeButton.innerHTML = '8 x 8'
+        resizeButton.innerHTML = '8x8'
     }
     if (resizeClickCounter === 1) {
         reset()
         createGrid(16,16)
         toggleGridOn()
-        resizeButton.innerHTML = '16 x 16'
+        resizeButton.innerHTML = '16x16'
     }
    
     if (resizeClickCounter === 2) {
         reset()
         createGrid(32,32)
         toggleGridOn()
-        resizeButton.innerHTML = '32 x 32'
+        resizeButton.innerHTML = '32x32'
     }
     if (resizeClickCounter === 3) {
         reset()
         createGrid(64,64)
         toggleGridOn()
-        resizeButton.innerHTML = '64 x 64'
+        resizeButton.innerHTML = '64x64'
         /* resizeClickCounter = -1 */
     } 
     if (resizeClickCounter === 4) {
         reset()
         createGrid(80,80)
         toggleGridOn()
-        resizeButton.innerHTML = '80 x 80'
+        resizeButton.innerHTML = '80x80'
         resizeClickCounter = -1
     } 
 })
 
-
+// turning on and off the 'screen' of the sktch device
 let onBtnClickCounter = 0
 onButton.addEventListener('click', function (){
     onBtnClickCounter++
   
     if(onBtnClickCounter === 1) {
-        gridContainer.style.boxShadow = "0px 0px 30px rgb(190, 190, 190)"
-        gridContainer.style.backgroundColor = "rgb(240, 240, 240)"   
+        gridContainer.style.boxShadow = "0px 0px 20px rgb(190, 190, 190)"
+        gridContainer.style.backgroundColor = "rgb(210, 210, 210)"   
         onButton.style.boxShadow = "0 0 10px rgb(255, 255, 255)"
     }
 
     if(onBtnClickCounter === 2) {
         gridContainer.style.boxShadow = "none"
         onButton.style.boxShadow = "none"
-        gridContainer.style.backgroundColor = "rgb(200, 200, 200)"  
+        gridContainer.style.backgroundColor = "rgb(20, 20, 20)"  
         onBtnClickCounter=0
     }  
 })
 
+// turns grid on and off
 let gridToggleClickCounter = 0
 gridToggleButton.addEventListener('click', function (){
     gridToggleClickCounter++
@@ -151,18 +152,20 @@ gridToggleButton.addEventListener('click', function (){
         }  
     }  
 })
+
 function toggleGridOn() {
     gridToggleClickCounter = 0
     gridToggleButton.innerHTML = 'On'
 }
 
+// resets grid back to default values 
 function clearButton() {
     reset()
     toggleGridOn()
     resizeButton.innerHTML = '8 x 8'
     createGrid(8,8)
- }
-
+}
+// while there are grid items still present delete until the last ramaining one is gone
 function reset() {
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.lastChild);

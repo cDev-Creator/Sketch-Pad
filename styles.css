@@ -3,14 +3,20 @@
     src: url(blox.ttf);
 }
 
+@font-face {
+    font-family: body;
+    src: url(body-font.ttf);
+}
+
+
 :root {
     --grid-columns: 1;
     --grid-rows: 1;
     --peach:rgba(255,103,104,1);
     --grey:rgba(202,202,202);
-    
-
     background: rgb(23,34,59);
+   /* background: rgb(176, 176, 176); */
+ 
 }
 
 body {
@@ -18,49 +24,59 @@ body {
 }
 
 #title {
-    display: flex;
-    justify-content: center;
-    margin: 50px 0px;
-    font-family: title;
-    font-size: 6em;
+    white-space:nowrap;
+    font-family: body;
+    z-index: 1;
+    padding-left: 60px;
+    padding-top: 10px;
+    position: absolute;
+    font-size: 4em;
     color: var(--peach);
-    text-shadow: 0 0 5px rgb(133, 120, 120);
+    text-shadow: 0 0 5px rgb(0, 0, 0);
     margin-left: -100px;
-
 }
+
 .content-container {
     display: flex;
     justify-content: center;
-    gap: 2em;
-}
-#grid-container-border {
-    border: 50px solid #6b778d;
-    box-shadow: 0px 0px 20px rgb(29, 28, 28);
-    border-radius: 30px;
-    border-bottom-width: 105px;  
+    /* gap: 7em; */
+    padding-top: 100px;
 }
 
+#grid-container-border {
+    border: 50px solid #6b778d;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 30px;
+    border-right-width: 130px;  
+    border-top-width: 90px;  
+}
 
 #grid-container {
     display: grid;
     justify-content: center;
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(20, 20, 20);
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-columns), 1fr);
-    height: 550px;
-    width: 550px;
+    height: 725px;
+    width: 725px;
     cursor: crosshair;
 }
 
 .btns-container {
     display: flex;
     flex-direction: column;
+    position: absolute;
     align-items: center;
+    margin-left: 780px;
     gap:2.5em;
-    margin-top: 100px; 
+    margin-top: 140px; 
 }
 
 button, input[type=color]  {
+    font-family: body;
+    width:75px;
+    height: 40px;
+    font-size: 1.1em;
     background-color:var(--grey);
     color: var(--peach);
     border-radius: 10px;
@@ -78,7 +94,6 @@ button:focus, input[type=color]:focus{
     transform: scale(1.2);
 }
 
-
 input[type=color] {
     height: 50px;
     width: 50px;
@@ -89,17 +104,16 @@ input[type=color]:focus {
     background-color:var(--grey);
 }
   
-#parent {
-    position: relative;
-}
+
 
 #on-button {
     background:transparent;
     border: none;
-    border-radius: 300px;
+    border-radius: 50px;
+    width: 80px;
+    height: 80px;
     position: absolute;
-    margin-top: 20px;
-    margin-left: 245px;   
+    margin-top: 600px;
     box-shadow: none;
     padding: 8px;
 }
