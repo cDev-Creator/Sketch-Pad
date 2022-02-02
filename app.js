@@ -162,7 +162,7 @@ function toggleGridOn() {
 function clearButton() {
     reset()
     toggleGridOn()
-    resizeButton.innerHTML = '8 x 8'
+    resizeButton.innerHTML = '8x8'
     createGrid(8,8)
 }
 // while there are grid items still present delete until the last ramaining one is gone
